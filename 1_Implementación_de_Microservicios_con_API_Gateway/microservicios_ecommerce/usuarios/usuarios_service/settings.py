@@ -141,3 +141,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+# URLs de servicios para comunicación entre microservicios
+PRODUCTOS_SERVICE_URL = 'http://localhost:8002/api/'
+ORDENES_SERVICE_URL = 'http://localhost:8003/api/'
