@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-%7d2b$*ittp!kbaya+l_-u$aj^!y-(xc1&c0mmbr*!3gh^57mj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'usuarios-service', 'productos-service', 'ordenes-service', 'api-gateway']
 
 
 # Application definition
@@ -150,7 +150,7 @@ SIMPLE_JWT = {
 
 # Configuración de servicios
 SERVICES = {
-    'USUARIOS': 'http://localhost:8001/api/',
-    'PRODUCTOS': 'http://localhost:8002/api/',
-    'ORDENES': 'http://localhost:8003/api/',
+    'USUARIOS': 'http://usuarios-service:8000/api/',  # Asegúrate que termine con /
+    'PRODUCTOS': 'http://productos-service:8000/api/',
+    'ORDENES': 'http://ordenes-service:8000/api/',
 }

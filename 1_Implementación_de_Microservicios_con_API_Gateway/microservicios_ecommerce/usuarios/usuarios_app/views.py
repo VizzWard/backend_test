@@ -12,6 +12,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'create':
+            # Permitir crear usuarios sin autenticación
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]

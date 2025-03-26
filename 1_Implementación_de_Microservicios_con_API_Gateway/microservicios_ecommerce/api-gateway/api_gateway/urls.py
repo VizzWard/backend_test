@@ -20,13 +20,15 @@ from gateway_app.views import LoginView, RefreshTokenView, ProxyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Rutas de autenticación
     path('api/token/', LoginView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', RefreshTokenView.as_view(), name='token_refresh'),
 
     # URL para API root
     path('api/', ProxyView.as_view(), name='api-root'),
 
-    # Rutas proxy para microservicios - Nota el patrón actualizado
-    re_path(r'^api/(?P<service>usuarios|productos|ordenes)(/(?P<path>.*))?$',
+    # Rutas proxy para microservicios
+    re_path(r'^api/(?P<service>usuarios|productos|ordenes)/?(?P<path>.*)?$',
             ProxyView.as_view(), name='proxy'),
 ]
