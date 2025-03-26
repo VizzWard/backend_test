@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  # Servicio de Usuarios
+  usuarios-service:
+    build: ./usuarios
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./usuarios:/app
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  # Servicio de Productos
+  productos-service:
+    build: ./productos
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./productos:/app
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  # Servicio de Órdenes
+  ordenes-service:
+    build: ./ordenes
+    ports:
+      - "8003:8000"
+    volumes:
+      - ./ordenes:/app
+    depends_on:
+      - usuarios-service
+      - productos-service
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  # API Gateway
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api-gateway:/app
+    depends_on:
+      - usuarios-service
+      - productos-service
+      - ordenes-service
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
